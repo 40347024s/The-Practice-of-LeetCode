@@ -76,7 +76,6 @@ string longestPalindrome3(string s) {
             best_l = l + 1;
             best_r = r;
         }
-        
     }
     
     return s.substr(best_l, best_r-best_l);
