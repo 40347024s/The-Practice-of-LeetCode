@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include <unordered_map>
 #include <vector>
-#include <string.h>
 
 using namespace std;
 
