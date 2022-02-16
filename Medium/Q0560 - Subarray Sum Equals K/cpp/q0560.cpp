@@ -50,13 +50,13 @@ int subarraySum2(vector<int>& nums, int k) {
 int subarraySum3(vector<int>& nums, int k) {
     int res = 0, sum = 0, n = nums.size();
     map<int, int> m{{0, 1}};
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         sum += nums[i];
         res += m[sum - k];
-        ++m[sum];
+        m[sum]++;
     }
     return res;
-    }
+}
 
 int main() {
     // vector<int> testcase_nums[] = {{1,1,1}, {1,2,3}, {1, -1, 0}, {1, -1, 0, 1, -1, 0}, {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
