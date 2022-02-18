@@ -67,34 +67,6 @@ bool checkInclusion2(string s1, string s2) {
     return false;
 }
 
-bool checkInclusion3(string s1, string s2) {
-    unordered_map<char, int> s1_table;
-    for (auto e: s1) {
-        s1_table[e]++;
-    }
-    int remain_len = s1.length();
-    int i = 0, j = 0;
-    while (j < (int)s2.length()) {
-        if (s1_table.find(s2[j])!=s1_table.end() && s1_table[s2[j]]>0) {
-            remain_len--;
-            s1_table[s2[j]]--;
-        }
-        if (remain_len==0) {
-            return true;
-        }
-        if ((j-i+1) == (int)s1.length()) {
-            if (s1_table.find(s2[i])!=s1_table.end() && s2[i]!=s2[j]) {
-                remain_len++;
-                s1_table[s2[i]]++;
-            }
-            i++;
-        }
-        j++;
-    }
-
-    return false;
-}
-
 void swap(string &ans, int i, int j) {
     char tmp = ans[j];
     ans[j] = ans[i];
@@ -166,9 +138,6 @@ int main() {
         printf("%s in %s? => %d\n", testcase_str1[i].c_str(), testcase_str2[i].c_str(), checkInclusion1(testcase_str1[i], testcase_str2[i]));
         // Method 2: Solution from Leetcode
         printf("%s in %s? => %d\n", testcase_str1[i].c_str(), testcase_str2[i].c_str(), checkInclusion2(testcase_str1[i], testcase_str2[i]));
-        // Method 3: Rewrite method1
-        printf("%s in %s? => %d\n", testcase_str1[i].c_str(), testcase_str2[i].c_str(), checkInclusion3(testcase_str1[i], testcase_str2[i]));
-        cout << "----------------" << endl;
     }
     return 0;
 }
