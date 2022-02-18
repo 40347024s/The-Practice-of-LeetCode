@@ -25,7 +25,7 @@ struct ListNode {
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode *ans = nullptr, *cur;
     int isCarry = 0;
-    while (l1 || l2) {
+    while (isCarry || l1 || l2) {
         int val1 = 0, val2 = 0;
         if (l1) {
             val1 = l1->val;
@@ -45,12 +45,12 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         cur = node;
     }
     
-    if (isCarry) {
-        ListNode *node = new ListNode;
-        node->val = isCarry;
-        node->next = nullptr;
-        cur->next = node;
-    }
+    // if (isCarry) {
+    //     ListNode *node = new ListNode;
+    //     node->val = isCarry;
+    //     node->next = nullptr;
+    //     cur->next = node;
+    // }
     return ans;
 }
 

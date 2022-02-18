@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 #include <utility>
 
 using namespace std;
@@ -47,15 +48,35 @@ int findPairs2(vector<int>& nums, int k) {
     }
     return ans;
 }
+
+int findPairs3(vector<int>& nums, int k) {
+    map<int, bool> seen;
+    int ans = 0;
+    sort(nums.begin(), nums.end());
+    for (auto num: nums) {
+        if (seen.find(num)!=seen.end() && !seen[num]) {
+            seen[num] = true;
+            ans++;
+        }
+        if (seen.find(num+k)==seen.end()) {
+            seen[num+k] = false;
+        }
+     }
+    return ans;
+}
+
 int main() {
-    vector<int> testcase_arr[4] = {{3,1,4,1,5}, {1,2,3,4,5}, {1,3,1,5,4}, {1,2,4,4,3,3,0,9,2,3}};
-    int testcase_int[4] = {2, 1, 0, 3};
-    for (int i=0; i< 4; i++) {
+    vector<int> testcase_arr[5] = {{3,1,4,1,5}, {1,2,3,4,5}, {1,3,1,5,4}, {1,2,4,4,3,3,0,9,2,3}, {1,1,1,1,1}};
+    int testcase_int[5] = {2, 1, 0, 3, 0};
+    for (int i=0; i< 5; i++) {
         // Method1: Naive 
         cout << findPairs1(testcase_arr[i], testcase_int[i]) << endl;
 
         // Method2: O(N)
         cout << findPairs2(testcase_arr[i], testcase_int[i]) << endl;
+
+        // Method3: O
+        cout << findPairs3(testcase_arr[i], testcase_int[i]) << endl;
     }
     return 0;
 }
