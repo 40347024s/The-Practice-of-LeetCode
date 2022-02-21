@@ -1,6 +1,6 @@
 =====================================================================================
 Given a string, 
-find the length 2of the longest substring without repeating characters.
+find the length of the longest substring without repeating characters.
 -------------------------------------------------------------------------------------
 Example 1:
 Input: "abcabcbb"
