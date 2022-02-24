@@ -1,58 +1,29 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <vector>
 
 using namespace std;
 
 bool isMatch(string s, string p) {
-    int index = 0;
-    for (int i=0; i<p.length(); i++) {
-        if (p[i]=='.') {
-            index++;
-        }
-        else if (p[i]=='*') {
-            
-        }
-        else if (p[i]!=s[index]) {
-            return false;
-        }
-        else {
-            index++;
-        }
+    if (!p.length()) {
+        return s.length()==0;
     }
-    if (index < s.length()) {
-        return false;
+    bool first_match = (s.length() > 0) && (p[0]==s[0] || p[0]=='.');
+    if ((p.length()>=2) && (p[1]=='*')) {
+        return (isMatch(s, p.substr(2, p.length()))) || (first_match && isMatch(s.substr(1, s.length()), p));
     }
-    return true;
-}
-
-void permutation(string head, string tail, int len) {
-    while (tail.length() > 0) {
-        char cur_ch = *tail.begin();
-        tail.erase(tail.begin());
-        if (cur_ch=='*') {
-            char prev_ch = *head.rbegin();
-            head.erase(head.end()-1);
-            for (int i=0; i<=len-(int)head.length(); i++) {
-                permutation(head+string(i, prev_ch), tail, len);
-            }
-        }
-        else {
-            head += cur_ch;
-        }
+    else {
+        return first_match && isMatch(s.substr(1, s.length()), p.substr(1, p.length()));
     }
-    if (head.length()==len) {
-        cout << "ans: " << head << endl;
-    }
-    return;
 }
 
 int main() {
-    // string testcase_s[4] = {"aa", "aa", "ab", "qwer", "aab"};
-    // string testcase_p[4] = {"a", "a*", ".*", "qw.r", "c*a*b"};
-    // for (int i=0; i<4; i++) {
-    //     cout << testcase_s[i] << ", " << testcase_p[i] << ": " << isMatch(testcase_s[i], testcase_p[i]) << endl;
-    // }
-    permutation("", "a*b*c*d*e*b", 3);
+    vector <string> testcase_s = {"aa", "aa", "ab", "qwer", "aab"};
+    vector <string> testcase_p = {"a", "a*", ".*", "qw.r", "c*a*b"};
+    for (int i=0; i<testcase_s.size(); i++) {
+        // Method 1: Recursion, Modified from solution of python
+        cout << testcase_s[i] << ", " << testcase_p[i] << ": " << isMatch(testcase_s[i], testcase_p[i]) << endl;
+    }
     return 0;
 }
