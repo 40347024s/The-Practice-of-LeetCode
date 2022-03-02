@@ -170,14 +170,13 @@ ListNode* sortList3(ListNode* head) {
 
 int main () {
     vector <vector <int>> testcase_heads = {{4,2,1,3}, {-1,5,3,4,0}, {}};
-    
     for (int i=0; i<testcase_heads.size(); i++) {
         printf("====== Testcase %d ======\n", i);
         // Method 1: Accepted, Time Complexity: O(nlogn), space complexity: O(n)
         printf("Method 1:\n");
         PrintList(GenerateList(testcase_heads[i]));
         PrintList(sortList1(GenerateList(testcase_heads[i])));
-        
+
         // Method 2: Solution, Top Down Merge Sort, Time Complexity: O(nlogn), space complexity: O(logn)
         printf("Method 2:\n");
         PrintList(GenerateList(testcase_heads[i]));
