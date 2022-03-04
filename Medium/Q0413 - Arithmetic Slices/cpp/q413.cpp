@@ -64,9 +64,7 @@ int numberOfArithmeticSlices2(vector<int>& nums) {
         else
         { 
             s1=0;
-        }
-        
-        
+        } 
     }
     return ans;
 }

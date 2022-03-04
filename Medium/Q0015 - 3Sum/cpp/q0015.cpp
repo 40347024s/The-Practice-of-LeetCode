@@ -88,6 +88,38 @@ vector<vector<int>> threeSum3(vector<int>& nums) {
 
 vector<vector<int>> threeSum4(vector<int>& nums) {
     vector<vector<int>> ans;
+    if (nums.size()<=2) {
+        return ans;
+    }
+    sort(nums.begin(), nums.end());
+    int p1 = 0;
+    while (p1 < nums.size()-2 ) {
+        int p2 = p1 + 1, p3 = nums.size() - 1;
+        while (p2 < p3) {
+            int sum = nums[p1] + nums[p2] + nums[p3];
+            if (sum==0) {
+                ans.push_back({nums[p1], nums[p2], nums[p3]});
+                while (p2 < nums.size()-1 && nums[p2]==nums[p2+1]) {
+                    p2++;
+                }
+                while (p3 > p1+1 && nums[p3]==nums[p3-1]) {
+                    p3--;
+                }
+                p2++;
+                p3--;
+            }
+            else if (sum < 0) {
+                p2++;
+            }
+            else {
+                p3--;
+            }
+        }
+        while (p1 < nums.size()-2 && nums[p1]==nums[p1+1]) {
+            p1++;
+        }
+        p1++;
+    }
     return ans;
 }
 
@@ -134,16 +166,16 @@ int main() {
         }
         printf("\n");
 
-        // // Method 4: Accepted
-        // printf("Output4: ");
-        // for (vector<int> ans: threeSum4(testcase_nums[i])) {
-        //     printf("[");
-        //     for (int j=0; j<ans.size(); j++) {
-        //         printf("%d, ", ans[j]);
-        //     }
-        //     printf("], ");
-        // }
-        // printf("\n");
+        // Method 4: Accepted
+        printf("Output4: ");
+        for (vector<int> ans: threeSum4(testcase_nums[i])) {
+            printf("[");
+            for (int j=0; j<ans.size(); j++) {
+                printf("%d, ", ans[j]);
+            }
+            printf("], ");
+        }
+        printf("\n");
     }
     return 0;
 }
